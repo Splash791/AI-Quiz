@@ -35,7 +35,7 @@ async function generateQuizQuestions(text, numQuestions, type) {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gemini-2.5-flash", 
+      model: "google/gemini-2.5-flash", 
       messages: [{ role: "user", content: prompt }],
       response_format: { type: "json_object" }
     });
