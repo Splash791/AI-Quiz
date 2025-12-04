@@ -1,0 +1,1 @@
+name ideas: sherpAI? meinvervAI?
