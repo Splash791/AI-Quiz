@@ -1,18 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import QuizGenerator from './components/quiz-generator';
 import QuizPage from './components/quiz-page';
+import { ThemeProvider } from './lib/theme'; 
 
 function App() {
   return (
-    <Router>
-      <div className="antialiased text-gray-900">
-        <Routes>
-          <Route path="/" element={<QuizGenerator />} />
-          
-          <Route path="/quiz/:id" element={<QuizPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <ThemeProvider> 
+      <Router>
+        <div className="min-h-screen bg-background text-foreground">
+          <Routes>
+            <Route path="/" element={<QuizGenerator />} />
+            <Route path="/quiz/:id" element={<QuizPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 

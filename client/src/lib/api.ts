@@ -6,10 +6,8 @@ const API_URL = 'http://localhost:5001/api/quizzes';
 
 export const api = {
 //generate quiz
-  generateQuiz: async (formData: FormData): Promise<{ quizId: string }> => {
-    const response = await axios.post(`${API_URL}/generate`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+generateQuiz: async (formData: FormData): Promise<{ quizId: string }> => {
+    const response = await axios.post(`${API_URL}/generate`, formData);
     return response.data;
   },
 
