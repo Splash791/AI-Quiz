@@ -89,7 +89,7 @@ export default function QuizGenerator() {
           <BookOpen className="w-12 h-12 text-primary drop-shadow-md" />
         </div>
         <h1 className="text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary to-white drop-shadow-sm pb-2">
-          AI Quiz Gen
+            MinervAI
         </h1>
         <p className="text-xl opacity-70 font-medium whitespace-nowrap mx-auto">
         Transform any topic or document into an interactive quiz in seconds using AI.
