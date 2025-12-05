@@ -11,11 +11,19 @@ const openai = new OpenAI({
 });
 
 async function generateQuizQuestions(text, numQuestions, type) {
-  console.log("Generating quiz with AI...");
   
+  let promptTypeInstruction = type;
+  if (type === "Hybrid") {
+    promptTypeInstruction = "mix of Multiple Choice and True/False questions";
+  }
+
   const prompt = `
-    Generate a ${numQuestions}-question ${type} quiz based on the text below.
-    Output purely valid JSON with no markdown formatting.
+    Generate a ${numQuestions}-question ${promptTypeInstruction} quiz based on the text below.
+    Output purely valid JSON.
+    
+    IMPORTANT:
+    - For Multiple Choice, provide 4 options.
+    - For True/False, provide exactly ["True", "False"] as answerChoices.
     
     Structure:
     {
@@ -23,8 +31,8 @@ async function generateQuizQuestions(text, numQuestions, type) {
         {
           "questionText": "...",
           "answerChoices": ["Option A", "Option B", "Option C", "Option D"],
-          "correctAnswer": "The exact string of the correct option",
-          "explanation": "A short sentence explaining why this answer is correct."
+          "correctAnswer": "The string of the correct option",
+          "explanation": "Why this is correct."
         }
       ]
     }

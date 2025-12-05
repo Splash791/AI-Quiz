@@ -11,7 +11,7 @@ const QuestionSchema = new mongoose.Schema({
 
 const QuizSchema = new mongoose.Schema({
   topic: { type: String, required: true },
-  type: { type: String, enum: ['Multiple Choice', 'True/False'], required: true },
+  type: { type: String, enum: ['Multiple Choice', 'True/False', 'Hybrid'], required: true },
   questionCount: { type: Number, required: true },
   questions: [QuestionSchema],
   score: { type: Number, default: 0 },
