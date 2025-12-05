@@ -1,37 +1,29 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
-type Theme = "dark" | "light";
+type Theme = "dark"; // Lock type to just 'dark'
 type Color = "blue" | "green" | "orange" | "purple" | "red";
 
 const ThemeContext = createContext<{
   theme: Theme;
   color: Color;
-  toggleTheme: () => void;
   setColor: (c: Color) => void;
 } | null>(null);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const theme: Theme = "dark"; // Hardcode theme
   const [color, setColorState] = useState<Color>("blue");
 
-  // Load from local storage on boot
   useEffect(() => {
-    const savedTheme = localStorage.getItem("ui-theme") as Theme || "light";
-    const savedColor = localStorage.getItem("ui-color") as Color || "blue";
-    setTheme(savedTheme);
+    const savedColor = (localStorage.getItem("ui-color") as Color) || "blue";
     setColorState(savedColor);
-    applyTheme(savedTheme, savedColor);
+    applyTheme(savedColor);
   }, []);
 
-  const applyTheme = (t: Theme, c: Color) => {
+  const applyTheme = (c: Color) => {
     const root = window.document.documentElement;
-    
-    // 1. Handle Dark Mode
-    root.classList.remove("light", "dark");
-    root.classList.add(t);
+    root.classList.add("dark"); // Force dark class
+    root.classList.remove("light");
 
-    // 2. Handle Colors (CSS Variables)
-    // We update the --primary and --ring variables dynamically
     const colors: Record<Color, string> = {
       blue: "221.2 83.2% 53.3%",
       green: "142.1 76.2% 36.3%",
@@ -44,21 +36,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.setProperty("--ring", colors[c]);
   };
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("ui-theme", newTheme);
-    applyTheme(newTheme, color);
-  };
-
   const setColor = (c: Color) => {
     setColorState(c);
     localStorage.setItem("ui-color", c);
-    applyTheme(theme, c);
+    applyTheme(c);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, color, toggleTheme, setColor }}>
+    <ThemeContext.Provider value={{ theme, color, setColor }}>
       {children}
     </ThemeContext.Provider>
   );
