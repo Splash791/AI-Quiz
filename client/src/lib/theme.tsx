@@ -1,16 +1,13 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
-type Theme = "dark"; // Lock type to just 'dark'
-type Color = "blue" | "green" | "orange" | "purple" | "red";
+type Color = "blue"|"green" | "orange" |"purple"| "red";
 
 const ThemeContext = createContext<{
-  theme: Theme;
   color: Color;
   setColor: (c: Color) => void;
 } | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const theme: Theme = "dark"; // Hardcode theme
   const [color, setColorState] = useState<Color>("blue");
 
   useEffect(() => {
@@ -21,7 +18,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const applyTheme = (c: Color) => {
     const root = window.document.documentElement;
-    root.classList.add("dark"); // Force dark class
+    root.classList.add("dark"); 
     root.classList.remove("light");
 
     const colors: Record<Color, string> = {
@@ -43,7 +40,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, color, setColor }}>
+    <ThemeContext.Provider value={{color, setColor }}>
       {children}
     </ThemeContext.Provider>
   );

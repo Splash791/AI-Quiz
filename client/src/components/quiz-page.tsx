@@ -2,15 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
 import { Quiz } from '../types';
-import { useTheme } from '../lib/theme';
 import { CheckCircle2, XCircle, ArrowRight, Loader2, Home, Sparkles, X, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function QuizPage() {
-  const { id } = useParams<{ id: string }>();
+  const {id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { theme, color } = useTheme();
-  
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [loading, setLoading] = useState(true);
   
@@ -20,26 +17,6 @@ export default function QuizPage() {
   const [feedback, setFeedback] = useState<{ isCorrect: boolean; explanation: string } | null>(null);
   
   const [isReviewMode, setIsReviewMode] = useState(false);
-
-  const getGradient = () => {
-    if (theme === 'dark') {
-      switch (color) {
-        case 'green': return 'from-gray-950 via-gray-900 to-emerald-950';
-        case 'orange': return 'from-gray-950 via-gray-900 to-orange-950';
-        case 'purple': return 'from-gray-950 via-gray-900 to-purple-950';
-        case 'red': return 'from-gray-950 via-gray-900 to-red-950';
-        default: return 'from-gray-950 via-gray-900 to-blue-950';
-      }
-    } else {
-      switch (color) {
-        case 'green': return 'from-green-100 via-emerald-100 to-teal-100';
-        case 'orange': return 'from-orange-100 via-amber-100 to-yellow-100';
-        case 'purple': return 'from-purple-100 via-fuchsia-100 to-pink-100';
-        case 'red': return 'from-red-100 via-rose-100 to-pink-100';
-        default: return 'from-blue-100 via-indigo-100 to-cyan-100';
-      }
-    }
-  };
 
   useEffect(() => {
     if (id) {
@@ -107,7 +84,7 @@ export default function QuizPage() {
   };
 
   if (loading) return (
-    <div className={`min-h-screen flex justify-center items-center bg-gradient-to-br ${getGradient()} ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+    <div className={`min-h-screen flex justify-center items-center bg-gradient-to-br `}>
       <div className="glass-card p-8 flex flex-col items-center gap-4">
         <Loader2 className="animate-spin w-12 h-12 text-primary" />
         <p className="font-medium animate-pulse">Loading your quiz...</p>
@@ -122,7 +99,7 @@ export default function QuizPage() {
 
   if (isFinished) {
     return (
-      <div className={`min-h-screen flex items-center justify-center p-4 bg-gradient-to-br ${getGradient()} ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+      <div className={`min-h-screen flex items-center justify-center p-4 bg-gradient-to-br `}>
         <div className="glass-card w-full max-w-lg text-center p-10 animate-in zoom-in-95 duration-500">
 
           <h2 className="text-4xl font-black mb-2">Quiz Complete!</h2>
@@ -168,7 +145,7 @@ export default function QuizPage() {
   }
 
   return (
-    <div className={`min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-500 bg-gradient-to-br ${getGradient()} ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+    <div className={`min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-500 bg-gradient-to-br`}>
       
       <div className="w-full max-w-3xl space-y-6">
         

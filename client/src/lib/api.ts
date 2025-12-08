@@ -17,7 +17,7 @@ export const api = {
         return response.data;
   },
 
-  // submit answer for a question
+  //submit answer for a question
     submitAnswer: async (quizId: string, questionId: string, userAnswer: string) => {
         const response = await axios.patch(`${API_URL}/${quizId}/question/${questionId}`, {
         userAnswer,

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { api } from '../lib/api';
-import { Quiz } from '../types';
-import { History, ArrowRight, Calendar, HelpCircle, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {api} from '../lib/api';
+import {Quiz} from '../types';
+import {History, ArrowRight, Calendar, HelpCircle, Trash2 } from 'lucide-react';
+import {Button} from '@/components/ui/button';
 import {Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger} from '@/components/ui/sheet';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import {ScrollArea} from '@/components/ui/scroll-area';
 
 export function QuizHistory() {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ export function QuizHistory() {
                       {quiz.topic}
                     </h3>
                     <div className={`px-2 py-1 rounded text-xs font-bold ${quiz.score >= 80 ? 'bg-green-500/20 text-green-400' : 'bg-gray-500/20 text-gray-400'}`}>
-                      {quiz.score !== undefined && quiz.score !== null ? `${quiz.score.toFixed(0)}%` : 'In Progress'}
+                      {quiz.score !== undefined && quiz.score !== null ? `${quiz.score.toFixed(0)}%` :'In Progress'}
                     </div>
                   </div>
                   
@@ -104,7 +104,7 @@ export function QuizHistory() {
                     </span>
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      {quiz.createdAt ? new Date(quiz.createdAt).toLocaleDateString() : 'Unknown Date'}
+                      {quiz.createdAt ? new Date(quiz.createdAt).toLocaleDateString() :'Unknown Date'}
                     </span>
                   </div>
 
