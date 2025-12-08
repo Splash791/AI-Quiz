@@ -20,16 +20,12 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 app.post('/api/quizzes/generate', upload.single('file'), async (req, res) => {
-  console.log("STEP 1: Route hit!"); 
-  console.log("STEP 2: Body received:", req.body);
-  console.log("STEP 3: File received:", req.file ? "YES" : "NO");
-
   try {
     const { topic, type, amount } = req.body;
     let textToProcess = topic || "";
 
     if (req.file) {
-      console.log("STEP 4: Processing file...");
+      
       const filePath = req.file.path;
       
       if (req.file.mimetype === 'application/pdf') {
@@ -47,16 +43,10 @@ app.post('/api/quizzes/generate', upload.single('file'), async (req, res) => {
     }
 
     if (!textToProcess) {
-      console.log("ERROR: No text found");
+      console.log("error: No text found");
       return res.status(400).json({ error: "No text provided" });
     }
-
-    console.log("STEP 5: Sending to AI Service...");
-    
     const aiData = await generateQuizQuestions(textToProcess, amount, type);
-    
-    console.log("STEP 6: AI Finished! Saving to DB...");
-
     const newQuiz = new Quiz({
       topic: req.file ? req.file.originalname : (topic || "Custom Topic"),
       type,
@@ -143,4 +133,4 @@ app.delete('/api/quizzes', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -11,8 +11,6 @@ const openai = new OpenAI({
 });
 
 async function generateQuizQuestions(text, numQuestions, type) {
-  
-  // 1. Handle the "Hybrid" logic
   let promptTypeInstruction = type;
   if (type === "Hybrid") {
     promptTypeInstruction = "mix of Multiple Choice and True/False questions";
