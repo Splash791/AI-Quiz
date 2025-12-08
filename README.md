@@ -42,10 +42,10 @@ A full-stack web application that uses Artificial Intelligence to generate inter
 
 Backend (Server)
 
-Runtime: Node.js & Express
+  - Runtime: Node.js & Express
 
-Database: MongoDB (Mongoose)
+  - Database: MongoDB (Mongoose)
 
-AI Integration: OpenAI SDK (pointing to OpenRouter API)
+  - AI Integration: OpenAI SDK (pointing to OpenRouter API)
 
-File Processing: Multer, PDF-Extraction, Mammoth (for .docx)
+  - File Processing: Multer, PDF-Extraction, Mammoth (for .docx)
