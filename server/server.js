@@ -112,5 +112,35 @@ app.patch('/api/quizzes/:id/question/:questionId', async (req, res) => {
   }
 });
 
+app.get('/api/quizzes', async (req, res) => {
+  try {
+    // return id, topic, score, and date. Sort by newest first.
+    const quizzes = await Quiz.find({}, 'topic score createdAt questionCount')
+      .sort({ createdAt: -1 })
+      .limit(20); //limit to last 20 to keep it fast
+    res.json(quizzes);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch quizzes" });
+  }
+});
+
+app.delete('/api/quizzes/:id', async (req, res) => {
+  try {
+    await Quiz.findByIdAndDelete(req.params.id);
+    res.json({ message: "Quiz deleted" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete quiz" });
+  }
+});
+
+app.delete('/api/quizzes', async (req, res) => {
+  try {
+    await Quiz.deleteMany({});
+    res.json({ message: "All quizzes deleted" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to clear history" });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

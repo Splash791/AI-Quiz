@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
 import { useTheme } from '../lib/theme';
-import { Loader2, Upload, BookOpen, Settings2, FileText, Palette, Sparkles } from 'lucide-react';
+import { Loader2, BookOpen, Settings2, FileText, Palette, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { QuizHistory } from './quiz-history';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -58,6 +58,7 @@ export default function QuizGenerator() {
     <div className={`min-h-screen p-8 flex flex-col items-center justify-center transition-all duration-700 bg-gradient-to-br ${getGradient()} text-white`}>
       
       <div className="absolute top-6 right-6 flex gap-3 z-50">
+      <QuizHistory />
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 shadow-lg text-white">

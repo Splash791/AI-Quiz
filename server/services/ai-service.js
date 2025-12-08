@@ -12,6 +12,7 @@ const openai = new OpenAI({
 
 async function generateQuizQuestions(text, numQuestions, type) {
   
+  // 1. Handle the "Hybrid" logic
   let promptTypeInstruction = type;
   if (type === "Hybrid") {
     promptTypeInstruction = "mix of Multiple Choice and True/False questions";
@@ -40,7 +41,7 @@ async function generateQuizQuestions(text, numQuestions, type) {
     Text to analyze:
     "${text.substring(0, 15000)}" 
   `;
-
+  
   try {
     const completion = await openai.chat.completions.create({
       model: "google/gemini-2.5-flash", 
