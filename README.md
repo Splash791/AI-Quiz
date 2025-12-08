@@ -40,7 +40,7 @@ A full-stack web application that uses Artificial Intelligence to generate inter
 
   - State/Routing: React Router DOM, Axios
 
-Backend (Server)
+- Backend (Server)
 
   - Runtime: Node.js & Express
 
